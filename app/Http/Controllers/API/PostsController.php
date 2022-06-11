@@ -12,7 +12,7 @@ class PostsController extends Controller
 {
     //list all posts
     public function posts() {
-        $posts = Post::all();
+        $posts = Post::with('user')->get();
 
         return response()->json([
             'success' => true,
@@ -42,7 +42,7 @@ class PostsController extends Controller
         $validator = Validator::make($request->all(),
         [
             'title' => 'required|string|min:2|max:50',
-            'body' => 'required|string|min:2|max:150',
+            'body' => 'required|string|min:2',
             'user_id' => 'required',
         ]);
         
@@ -68,7 +68,7 @@ class PostsController extends Controller
         $validator = Validator::make($request->all(),
         [
             'title' => 'required|string|min:2|max:50',
-            'body' => 'required|string|min:2|max:150',
+            'body' => 'required|string|min:2',
             'user_id' => 'required',
             'id' => 'required',
         ]);
