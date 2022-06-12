@@ -72,6 +72,8 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['role'];
+
     public function role()
     {
         return $this->belongsTo('App\Models\Role');
